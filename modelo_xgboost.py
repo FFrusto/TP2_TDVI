@@ -6,7 +6,7 @@ from sklearn.pipeline import make_pipeline
 from sklearn.model_selection import train_test_split
 
 # Load the competition data
-comp_data = pd.read_csv("competition_data.csv")
+comp_data = pd.read_csv("/Users/franciscofrustoalvarado/Desktop/TD_VI/TP2_TDVI/competition_data.csv")
 comp_data["date"] = pd.to_datetime(comp_data["date"])
 
 # Divide la columna de fecha en día, mes y año

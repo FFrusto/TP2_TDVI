@@ -6,7 +6,7 @@ from sklearn.pipeline import make_pipeline
 
 
 # Load the competition data
-comp_data = pd.read_csv("competition_data.csv")
+comp_data = pd.read_csv("/Users/franciscofrustoalvarado/Desktop/TD_VI/TP2_TDVI/competition_data.csv")
 
 # Split into training and evaluation samples
 train_data = comp_data[comp_data["ROW_ID"].isna()]
@@ -26,13 +26,16 @@ cls = make_pipeline(SimpleImputer(), DecisionTreeClassifier(max_depth=8, random_
 cls.fit(X_train, y_train)
 
 # Predict on the evaluation set
+y_true = eval_data["conversion"]
 eval_data = eval_data.drop(columns=["conversion"])
 eval_data = eval_data.select_dtypes(include='number')
 y_preds = cls.predict_proba(eval_data.drop(columns=["ROW_ID"]))[:, cls.classes_ == 1].squeeze()
 
-# Make the submission file
-submission_df = pd.DataFrame({"ROW_ID": eval_data["ROW_ID"], "conversion": y_preds})
-submission_df["ROW_ID"] = submission_df["ROW_ID"].astype(int)
-submission_df.to_csv("basic_model.csv", sep=",", index=False)
 
-print(cls.score(X_train, y_train))
+# Make the submission file
+# submission_df = pd.DataFrame({"ROW_ID": eval_data["ROW_ID"], "conversion": y_preds})
+# submission_df["ROW_ID"] = submission_df["ROW_ID"].astype(int)
+# submission_df.to_csv("basic_model.csv", sep=",", index=False)
+
+accuracy = cls.score(eval_data.drop(columns=["ROW_ID"]), y_true)
+print("Accuracy:", accuracy)
