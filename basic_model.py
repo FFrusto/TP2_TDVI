@@ -36,6 +36,3 @@ y_preds = cls.predict_proba(eval_data.drop(columns=["ROW_ID"]))[:, cls.classes_ 
 # submission_df = pd.DataFrame({"ROW_ID": eval_data["ROW_ID"], "conversion": y_preds})
 # submission_df["ROW_ID"] = submission_df["ROW_ID"].astype(int)
 # submission_df.to_csv("basic_model.csv", sep=",", index=False)
-
-accuracy = cls.score(eval_data.drop(columns=["ROW_ID"]), y_true)
-print("Accuracy:", accuracy)

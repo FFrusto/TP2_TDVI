@@ -50,4 +50,4 @@ for data_file in data_files:
     # submission_df.to_csv(f"xgboost_model_{os.path.splitext(data_file)[0]}.csv", sep=",", index=False)
 
     print(f"Archivo: {data_file}")
-    print(f"Score: {cls.score(X_train, y_train)}")
+    print(f"Score: {cls.score(X_test, y_test)}")
